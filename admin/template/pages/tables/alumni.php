@@ -1,7 +1,32 @@
+<?php
+$servername = "localhost";
+$username = "ροοτ";
+$password = "";
+$dbname = "alumnimemo";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM alumni";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  while($row = $result->fetch_assoc()) {
+    echo "User: " . $row["username"]. " - Full Name: " . $row["fullname"]. "<br>";
+  }
+} else {
+  echo "0 results";
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Breeze Admin</title>
@@ -24,7 +49,6 @@
                 <div class="nav-profile-image">
                   <img src="assets/images/faces/face1.jpg" alt="profile" />
                   <span class="login-status online"></span>
-                  <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column pr-3">
                   <span class="font-weight-medium mb-2">Henry Klein</span>
